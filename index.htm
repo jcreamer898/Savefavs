@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SaveFavs.com :: Never lose your favs again!</title>
+		<link rel="stylesheet" type="text/css" href="content/styles.css" />
+		<link rel="stylesheet" type="text/css" href="content/960.css" />
+		<script src="libs/modernizr-latest.js"></script>
+        <script data-main="main" src="require-jquery.js"></script>
+    </head>
+    <body>
+		<header>
+			<div class="container_12">
+				<div class="grid_12">
+					<h3 id="site_header">
+						SaveFavs
+					</h3>
+				</div>
+			</div>
+		</header>
+        
+		<div class="container_12">
+			<section id="main" class="grid_12">
+				<input id="save_links" name="save_links" placeholder="Type your favorite here" />
+				<span id="validate_link"></span>
+				<ul id="links">
+				</ul>
+			</section>
+			<div class="clear"></div>
+			<footer class="grid_12">
+			
+			</footer>
+		</div>
+		
+		<script id="linksTemplate" type="text/html">
+			<%= url %>
+		</script>
+    </body>
+</html>
