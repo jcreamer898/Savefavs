@@ -9,7 +9,10 @@ define(['jquery','backbone','underscore','scripts/links','scripts/linkView'], fu
 			this.URL_REGEX = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
 			this.collection = new links();
 			this.collection.bind('add', this.renderLink, this);
+			this.collection.bind('reset', this.renderAll, this);
 			this.validateMessage = $("#validate_link",this.el);
+			
+			this.collection.fetch();
 		},
 		'addLink': function(event){
 			var url = $(event.currentTarget).val()
@@ -42,6 +45,11 @@ define(['jquery','backbone','underscore','scripts/links','scripts/linkView'], fu
 				}
 			}
 		},
+		renderAll: function(){
+			this.collection.each(
+				this.renderLink
+			);
+		},
 		renderLink: function(model){
 			var view = new linksView({ model: model});
 			
@@ -49,6 +57,7 @@ define(['jquery','backbone','underscore','scripts/links','scripts/linkView'], fu
 				.appendTo($("#links",this.el))
 				.fadeIn("fast");
 			
+			model.save();
 		},
 		render: function(){
 			console.log("Ready...");
