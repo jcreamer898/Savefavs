@@ -1,4 +1,4 @@
-define(['jquery','backbone','scripts/favsView'],function($,Backbone,favsView){
+define(['backbone','links/favsView'],function(Backbone,favsView){
 	var homeRouter = Backbone.Router.extend({
 		initialize: function(){
 			Backbone.history.start();

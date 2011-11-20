@@ -1,4 +1,4 @@
-define(['jquery','backbone','underscore','scripts/links','scripts/linkView'], function($, Backbone,_,links,linksView){
+define(['jquery','backbone','underscore','links/links','links/linkView'], function($, Backbone,_,links,linksView){
 	var favsView = Backbone.View.extend({
 		el: '#main',
 		events: {

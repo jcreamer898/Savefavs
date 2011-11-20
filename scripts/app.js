@@ -1,6 +1,6 @@
-define(['jquery','backbone','scripts/home'], function($, Backbone, router){
+define(['routers/home'], function(router){
 	var init = function(){
-		console.log("Started");
+		console.log("App Started...");
 	};
 	
 	return { init: init};

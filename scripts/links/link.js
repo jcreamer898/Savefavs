@@ -1,4 +1,4 @@
-define(['jquery','backbone','underscore'],function($,Backbone,_){
+define(['backbone','underscore'],function(Backbone,_){
 	var linkModel = Backbone.Model.extend({
 	
 	});
