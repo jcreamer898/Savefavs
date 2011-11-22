@@ -1,18 +1,37 @@
-define(['jquery','backbone','underscore','links/links','links/linkView'], function($, Backbone,_,links,linksView){
+define(['jquery',
+		'backbone',
+		'underscore',
+		'links/links',
+		'links/linkView',
+		'jqueryui/draggable',
+		'jqueryui/droppable',
+		'jqueryui/effects/core'], function($, Backbone,_,links,linksView,draggable){
 	var favsView = Backbone.View.extend({
-		el: '#main',
+		el: $('#main'),
 		events: {
 			//'blur #save_links': 'addLink'
 			'keyup #save_links': 'addLink'
 		},
 		initialize: function(){
+			var self = this;
 			this.URL_REGEX = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
 			this.collection = new links();
+			
 			this.collection.bind('add', this.renderLink, this);
 			this.collection.bind('reset', this.renderAll, this);
 			this.validateMessage = $("#validate_link",this.el);
 			
+			_.bindAll(this, 'renderLink', 'renderAll', 'removeFav');
+			
 			this.collection.fetch();
+			
+			this.trash = $("#trash", this.el).droppable({
+				drop: function(event, ui){
+					self.removeFav($.trim(ui.helper.html()));
+				}
+			});
+			
+			this.$("input").show('fast');
 		},
 		'addLink': function(event){
 			var url = $(event.currentTarget).val()
@@ -55,12 +74,32 @@ define(['jquery','backbone','underscore','links/links','links/linkView'], functi
 			
 			$(view.el).hide()
 				.appendTo($("#links",this.el))
-				.fadeIn("fast");
+				.fadeIn("fast")
+				.draggable({
+					revert: true
+				});
 			
 			model.save();
+			
+			if(this.collection.length > 0){
+				$("#trash",this.el).slideDown("slow", 'easeOutBounce');
+			}
 		},
 		render: function(){
 			console.log("Ready...");
+		},
+		removeFav: function(name){
+			var link = this.collection.find(function(fav){
+				return fav.get('url') == name;
+			});
+			
+			if(typeof link !== 'undefined'){
+				link.destroy();
+			}
+			
+			if(this.collection.length <= 0){
+				$("#trash",this.el).slideUp("slow", 'easeOutBounce');
+			}
 		}
 	});
 	

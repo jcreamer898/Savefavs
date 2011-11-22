@@ -7,7 +7,11 @@
     //optimize: "none",
 
     paths: {
-        "jquery": "require-jquery"
+        "jquery": "require-jquery",
+		"underscore": "libs/underscore", 
+		"backbone": "libs/backbone",
+		"jqueryui": 'libs/jqueryui-1.8.14/jqueryui/',
+		"jqueryui/draggable": 'libs/jqueryui-1.8.14/jqueryui/draggable'
     },
 
     modules: [
