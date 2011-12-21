@@ -1,15 +1,15 @@
-define(['backbone','links/favsView'],function(Backbone,favsView){
+define(['backbone', 'links/favsView'], function(Backbone, favsView) {
 	var homeRouter = Backbone.Router.extend({
-		initialize: function(){
+		initialize : function() {
 			Backbone.history.start();
 		},
-		routes: {
-			'': 'home'
+		routes : {
+			'' : 'home'
 		},
-		'home': function(){
+		'home' : function() {
 			favsView.render();
 		}
 	});
-	
+
 	return new homeRouter();
 });
